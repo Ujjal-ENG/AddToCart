@@ -125,7 +125,7 @@ const Header = () => {
                           <td>
                             <h5>{data.rname}</h5>
                             <h4>Price: {data.price} TK</h4>
-                            <p>Quantity: {data.qnty + 1}</p>
+                            <p>Quantity: {data.qnty}</p>
                           </td>
                           <td
                             className="mt-5"

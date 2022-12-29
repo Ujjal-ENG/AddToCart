@@ -8,7 +8,14 @@ export const ADD = (item) => {
 
 export const DELETE = (id) => {
   return {
-    type: "REMOVE_CART",
+    type: "DELETE_CART",
     payload: id,
+  };
+};
+
+export const REMOVE = (item) => {
+  return {
+    type: "REMOVE_CART",
+    payload: item,
   };
 };

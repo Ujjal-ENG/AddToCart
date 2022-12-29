@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/iframe-has-title */
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DELETE } from "./redux/actions/action";
+import { DELETE, ADD } from "./redux/actions/action";
 
 const CardsDetails = () => {
   const history = useNavigate();
@@ -15,6 +17,7 @@ const CardsDetails = () => {
 
   const getData = useSelector((state) => state.cartReducers.carts);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const compare = () => {
     let comapreData = getData.filter((e) => {
       // eslint-disable-next-line eqeqeq
@@ -28,6 +31,12 @@ const CardsDetails = () => {
   }, [id]);
 
   const dispath = useDispatch();
+
+  const send = (e) => {
+    // console.log(e);
+
+    dispath(ADD(e));
+  };
 
   const deletePro = (id) => {
     dispath(DELETE(id));
@@ -44,6 +53,13 @@ const CardsDetails = () => {
               <>
                 <div className="items_img">
                   <img src={el.imgdata} alt="oneImg" />
+                </div>
+
+                <div>
+                  <iframe
+                    src="https://embed.lottiefiles.com/animation/88882"
+                    className="item_if"
+                  ></iframe>
                 </div>
                 <div className="details pd-3">
                   <Table>
@@ -64,6 +80,26 @@ const CardsDetails = () => {
                         <strong>Total: </strong>
                         300 TK
                       </p>
+
+                      <div
+                        className="mt-5 d-flex justify-content-between align-items-center"
+                        style={{
+                          width: 100,
+                          cursor: "pointer",
+                          background: "#ddd",
+                          color: "#111",
+                        }}
+                      >
+                        <span style={{ fontSize: 24 }}> - </span>
+                        <span style={{ fontSize: 24 }}> {el.qnty} </span>
+                        <span
+                          style={{ fontSize: 24 }}
+                          onClick={() => send(el)}
+                        >
+                          {" "}
+                          +{" "}
+                        </span>
+                      </div>
                     </td>
                     <td>
                       <p>
