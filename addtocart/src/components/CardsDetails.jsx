@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { DELETE } from "./redux/actions/action";
 
 const CardsDetails = () => {
+  const history = useNavigate();
+
   const [data, setData] = useState([]);
   // console.log(data);
   const { id } = useParams();
@@ -22,6 +26,13 @@ const CardsDetails = () => {
   useEffect(() => {
     compare();
   }, [id]);
+
+  const dispath = useDispatch();
+
+  const deletePro = (id) => {
+    dispath(DELETE(id));
+    history("/");
+  };
 
   return (
     <div className="container mt-2">
@@ -62,9 +73,7 @@ const CardsDetails = () => {
 
                       <p>
                         <strong>Order Review: </strong>{" "}
-                        <h6 className="text-center">
-                          {el.somedata}
-                        </h6>
+                        <h6 className="text-center">{el.somedata}</h6>
                       </p>
 
                       <p>
@@ -76,6 +85,7 @@ const CardsDetails = () => {
                             fontSize: 20,
                             cursor: "pointer",
                           }}
+                          onClick={() => deletePro(el.id)}
                         ></i>
                       </p>
                     </td>

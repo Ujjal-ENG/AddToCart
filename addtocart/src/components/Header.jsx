@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/iframe-has-title */
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Badge from "@mui/material/Badge";
@@ -15,6 +15,8 @@ const Header = () => {
   const getData = useSelector((state) => state.cartReducers.carts);
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [price, setPrice] = useState(0);
+
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,6 +30,20 @@ const Header = () => {
   const deletePro = (id) => {
     dispath(DELETE(id));
   };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const totalPrice = () => {
+    let price = 0;
+    // eslint-disable-next-line array-callback-return
+    getData.map((el) => {
+      price = el.price + price;
+    });
+    setPrice(price);
+  };
+
+  useEffect(() => {
+    totalPrice();
+  }, [totalPrice]);
 
   return (
     <>
@@ -128,7 +144,7 @@ const Header = () => {
                       </>
                     );
                   })}
-                  <p className="text-center">Total: 300 TK</p>
+                  <p className="text-center">Total: {price} TK</p>
                 </tbody>
               </Table>
             </div>
