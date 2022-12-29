@@ -6,8 +6,13 @@ import Badge from "@mui/material/Badge";
 import Nav from "react-bootstrap/Nav";
 import Menu from "@mui/material/Menu";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import Table from "react-bootstrap/esm/Table";
 
 const Header = () => {
+  const getData = useSelector((state) => state.cartReducers.carts);
+
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -30,7 +35,7 @@ const Header = () => {
           </Nav>
 
           <Badge
-            badgeContent={4}
+            badgeContent={getData.length}
             color="primary"
             id="demo-positioned-button"
             aria-controls={open ? "demo-positioned-menu" : undefined}
@@ -64,14 +69,65 @@ const Header = () => {
             transition: "all 0.2s",
           }}
         >
-          <div className="card-details">
-            <i className="fas fa-close smallclose" onClick={handleClose}></i>
-            <p>Your Carts is Empty</p>
-            <iframe
-              src="https://embed.lottiefiles.com/animation/71390"
-              className="iframe"
-            />
-          </div>
+          {getData.length > 0 ? (
+            <div
+              className="cardDetails"
+              style={{ width: "24rem", padding: 10 }}
+            >
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Photo</th>
+                    <th>Restaurant Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {getData.map((data) => {
+                    return (
+                      <>
+                        <tr>
+                          <td>
+                            <NavLink to={`/cart/${data.id}`}>
+                              <img
+                                src={data.imgdata}
+                                alt="cartImg"
+                                style={{ width: "5rem", height: "5rem" }}
+                              />
+                            </NavLink>
+                          </td>
+                          <td>
+                            <h5>{data.rname}</h5>
+                            <h4>Price: {data.price} TK</h4>
+                            <p>Quantity: {data.qnty + 1}</p>
+                          </td>
+                          <td
+                            className="mt-5"
+                            style={{
+                              color: "red",
+                              fontSize: 20,
+                              cursor: "pointer",
+                            }}
+                          >
+                            <i className="fas fa-trash"></i>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })}
+                  <p className="text-center">Total: 300 TK</p>
+                </tbody>
+              </Table>
+            </div>
+          ) : (
+            <div className="card-details">
+              <i className="fas fa-close smallclose" onClick={handleClose}></i>
+              <p>Your Carts is Empty</p>
+              <iframe
+                src="https://embed.lottiefiles.com/animation/71390"
+                className="iframe"
+              />
+            </div>
+          )}
         </Menu>
       </Navbar>
     </>

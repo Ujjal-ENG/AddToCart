@@ -2,11 +2,21 @@ import React, { useState } from "react";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useDispatch } from "react-redux";
 
 import CardsData from "./CardsData.jsx";
+import { ADD } from "./redux/actions/action.js";
 
 const Cards = () => {
   const [data, setData] = useState(CardsData);
+
+  const dispatch = useDispatch();
+
+  const send = (e) => {
+    // console.log(e);
+
+    dispatch(ADD(e));
+  };
 
   return (
     <div className="container mt-3">
@@ -31,7 +41,11 @@ const Cards = () => {
                     </h6>
                   </Card.Text>
                   <div className="button-div">
-                    <Button variant="primary col-12" className="button">
+                    <Button
+                      variant="primary col-12"
+                      className="button"
+                      onClick={() => send(item)}
+                    >
                       Add to Cart
                     </Button>
                   </div>
