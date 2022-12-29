@@ -5,7 +5,7 @@ import Table from "react-bootstrap/Table";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { DELETE, ADD } from "./redux/actions/action";
+import { DELETE, ADD, REMOVE } from "./redux/actions/action";
 
 const CardsDetails = () => {
   const history = useNavigate();
@@ -43,6 +43,10 @@ const CardsDetails = () => {
     history("/");
   };
 
+  const removeItem = (item) => {
+    dispath(REMOVE(item));
+  };
+
   return (
     <div className="container mt-2">
       <h2 className="text-center">Items Details Page</h2>
@@ -78,7 +82,7 @@ const CardsDetails = () => {
                       </p>
                       <p>
                         <strong>Total: </strong>
-                        300 TK
+                        {el.price * el.qnty} TK
                       </p>
 
                       <div
@@ -90,12 +94,19 @@ const CardsDetails = () => {
                           color: "#111",
                         }}
                       >
-                        <span style={{ fontSize: 24 }}> - </span>
-                        <span style={{ fontSize: 24 }}> {el.qnty} </span>
                         <span
                           style={{ fontSize: 24 }}
-                          onClick={() => send(el)}
+                          onClick={
+                            el.qnty <= 1
+                              ? deletePro(el.id)
+                              : () => removeItem(el)
+                          }
                         >
+                          {" "}
+                          -{" "}
+                        </span>
+                        <span style={{ fontSize: 24 }}> {el.qnty} </span>
+                        <span style={{ fontSize: 24 }} onClick={() => send(el)}>
                           {" "}
                           +{" "}
                         </span>

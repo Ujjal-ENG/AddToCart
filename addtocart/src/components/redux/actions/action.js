@@ -15,7 +15,7 @@ export const DELETE = (id) => {
 
 export const REMOVE = (item) => {
   return {
-    type: "REMOVE_CART",
+    type: "REMOVE_ONE",
     payload: item,
   };
 };
