@@ -8,10 +8,11 @@ import Menu from "@mui/material/Menu";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Table from "react-bootstrap/esm/Table";
+import { DELETE } from "./redux/actions/action";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const getData = useSelector((state) => state.cartReducers.carts);
-
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -21,6 +22,13 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const dispath = useDispatch();
+
+  const deletePro = (id) => {
+    dispath(DELETE(id));
+  };
+
   return (
     <>
       <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
@@ -87,7 +95,10 @@ const Header = () => {
                       <>
                         <tr>
                           <td>
-                            <NavLink to={`/cart/${data.id}`}>
+                            <NavLink
+                              to={`/cart/${data.id}`}
+                              onClick={handleClose}
+                            >
                               <img
                                 src={data.imgdata}
                                 alt="cartImg"
@@ -108,7 +119,10 @@ const Header = () => {
                               cursor: "pointer",
                             }}
                           >
-                            <i className="fas fa-trash"></i>
+                            <i
+                              className="fas fa-trash"
+                              onClick={() => deletePro(data.id)}
+                            ></i>
                           </td>
                         </tr>
                       </>
