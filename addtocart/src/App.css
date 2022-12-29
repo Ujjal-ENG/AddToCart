@@ -1,0 +1,77 @@
+.smallclose {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  font-size: 20px;
+  transition: all 0.3s;
+}
+.smallclose:active {
+  font-size: 15px;
+  color: red;
+  font-weight: bold;
+}
+
+.card-details {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  margin: 40px;
+  border: none;
+}
+.card .img {
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.card .img:hover {
+  border-radius: 10px;
+  background: #e0e0e0;
+  box-shadow: 23px 23px 26px #cecece, -23px -23px 26px #f2f2f2;
+}
+
+span {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.button-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s;
+}
+.button-div .button:active {
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  border: 3px solid tomato;
+}
+
+.itemsDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  background: #fffafa;
+  box-shadow: 10px 10px 35px #c4c1c1, -10px -10px 35px #ffffff;
+}
+
+.itemsDetails .items_img img {
+  width: 400px;
+  height: 300px;
+  border-radius: 5px;
+}
+
+.details {
+  margin-right: 30px;
+}
+
+span .startag {
+  text-align: center;
+  font-size: 10px;
+}
