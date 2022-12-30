@@ -97,7 +97,7 @@ const CardsDetails = () => {
                         <span
                           style={{ fontSize: 24 }}
                           onClick={
-                            el.qnty <= 1
+                            el.qnty <= 0
                               ? deletePro(el.id)
                               : () => removeItem(el)
                           }
